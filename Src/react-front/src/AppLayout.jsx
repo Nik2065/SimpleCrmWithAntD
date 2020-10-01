@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-//import { authenticationService } from "./_Services/authentication.service";
+import { authenticationService } from "./_Services/authentication.service";
 
 import 'antd/dist/antd.css';
 
 import { 
     Layout, Menu, 
     Breadcrumb, 
-    Row, Col, Dropdown, Button, Badge, Tooltip
+    Row, Col, Dropdown, Button, Badge, Tooltip, 
 } from 'antd';
 
 
@@ -29,37 +29,40 @@ import Icon, {
     PlusCircleOutlined
 } from '@ant-design/icons';
 
-//import GMIcon from './_Components/Icons/GMIcon.jsx'
-//import BookIcon from './_Components/Icons/BookIcon.jsx'
-//import DeliveryIcon from './_Components/Icons/DeliveryIcon.jsx'
-//import TransportationIcon from './_Components/Icons/TransportationIcon.jsx'
-//import PickupIcon from './_Components/Icons/PickupIcon.jsx'
-//import OperationIcon from './_Components/Icons/OperationIcon.jsx'
-
-
 const { Header, Sider, Content, Footer } = Layout;
 const { SubMenu } = Menu;
 const Year = new Date().getFullYear();
 
 export default class AppLayout extends React.Component {
 
-
+  state = {
+    currentUser: authenticationService.currentUserValue,
+  }
+  
 
 
     render() {
-
-
-
         return (
             <Layout>
             <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
               <div className="logo" />
               <Menu theme="dark" mode="horizontal" style={{textAlign:"right"}} >
-                <Menu.Item key="1">nav 1</Menu.Item>
-                <Menu.Item key="2">nav 2</Menu.Item>
-                <Menu.Item key="3">
-                    <Link to='/landing'>Лендинг</Link>
+                <Menu.Item key="1">
+                    <Link to='/landing'>О программе</Link>
                 </Menu.Item>
+                <Menu.Item key="2">
+                    <Link to='/login'>Войти</Link>
+                </Menu.Item>
+
+                {
+                (this.state.currentUser!=null) ?
+                  <React.Fragment>
+                  <Menu.Item>&nbsp;|&nbsp;</Menu.Item>
+                  <Menu.Item key="3">Заказы</Menu.Item>
+                  <Menu.Item key="4">nav 2</Menu.Item>
+                  </React.Fragment>
+                : ""
+                }
               </Menu>
             </Header>
             <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
@@ -74,7 +77,7 @@ export default class AppLayout extends React.Component {
 
               </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            <Footer style={{ textAlign: 'center' }}>2020 SimpleCrm</Footer>
           </Layout>
         );
     }

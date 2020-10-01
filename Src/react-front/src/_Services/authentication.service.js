@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
-
 import { config }from './config';
-import { authHeader, handleResponse } from '../_Helpers';
+import { authHeader } from '../_Helpers/auth-header';
+import { handleResponse } from '../_Helpers/handle-response';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
@@ -42,7 +42,7 @@ function logout() {
     window.location.reload();
 }
 
-function checkRouteAccess(route:string) {
+function checkRouteAccess(route) {
 
     //console.log(route);
 

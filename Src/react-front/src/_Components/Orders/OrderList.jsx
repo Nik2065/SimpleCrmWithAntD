@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export default class App extends React.Component {
+export default class OrderList extends React.Component {
 
     render(){
         return(

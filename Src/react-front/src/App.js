@@ -3,9 +3,13 @@ import { Switch, Route } from 'react-router-dom';
 
 import 'antd/dist/antd.css'; 
 
+import { PrivateRoute } from './PrivateRoute';
+import AppLayout from './AppLayout.jsx'
 import Main from './_Components/Main'
 import Login from './_Components/User/Login.jsx'
-import Landing from './_Components/Landing.jsx'
+import Profile from './_Components/User/Profile.jsx'
+import Landing from './Landing.jsx'
+import OrderList from './_Components/Orders/OrderList.jsx'
 
 
 
@@ -13,15 +17,14 @@ import Landing from './_Components/Landing.jsx'
 export default class App extends React.Component {
 
 
-
   render(){
   return (
     <React.Fragment>
     <Switch>
-        <Route exact path="/" component={Main} />
+        <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/landing" component={Landing} />
-
+        <PrivateRoute layout={AppLayout} path="/orders" component={OrderList}/>
+        <PrivateRoute layout={AppLayout} path="/profile" component={Profile}/>
     </Switch>
     </React.Fragment>
   );
